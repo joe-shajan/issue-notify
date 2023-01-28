@@ -20,9 +20,19 @@ const NavBar: React.FunctionComponent<INavBarProps> = () => {
           )}
         </div>
         {session?.user?.name ? (
-          <button onClick={() => void signOut()}>Sign out</button>
+          <button
+            className="rounded p-2 hover:bg-gray-700"
+            onClick={() => void signOut()}
+          >
+            Sign out
+          </button>
         ) : (
-          <button onClick={() => void signIn()}>Sign in</button>
+          <button
+            className="rounded p-2 hover:bg-gray-700"
+            onClick={() => void signIn()}
+          >
+            Sign in
+          </button>
         )}
       </div>
     </nav>
