@@ -1,44 +1,48 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import * as React from "react";
 import { useState } from "react";
-import Link from "next/link";
+import Image from "next/image";
+import NavLink from "./NavLink";
+import { useRouter } from "next/router";
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface INavBarProps {}
 
 const NavBar: React.FunctionComponent<INavBarProps> = () => {
   const { data: session } = useSession();
+  const router = useRouter();
+
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <nav className="bg-gray-800 text-slate-100">
       <div className="flex h-16 items-center justify-around">
         <div className="flex items-center">
-          <img
-            src="./logo.jfif"
+          <Image
+            src="/logo.jfif"
             alt="logo"
-            className="square-full mr-4 h-8 w-8"
+            width="42"
+            height="42"
+            className="rounded"
           />
-          <div className="relative">
-            <Link href="/" as="/">
-              <button className="rounded-lg bg-gray-800 p-2 text-white hover:bg-gray-900">
-                Home
-              </button>
-            </Link>
-            <Link href="/issues" as="/issues">
-              <button className="rounded-lg bg-gray-800 p-2 text-white hover:bg-gray-900">
-                Issues Page
-              </button>
-            </Link>
+          <div className="ml-10 flex items-baseline space-x-4">
+            <NavLink path={router.pathname} url={"/"} name={"Home"} />
+            <NavLink path={router.pathname} url={"/issues"} name={"Issues"} />
           </div>
         </div>
-        <div className="relative">
+        <div className="">
           <button
             className="rounded-lg bg-gray-800 p-2 "
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={() => setIsOpen((prev) => !prev)}
           >
-            <img
-              src={session?.user?.image ? session?.user?.image : "./logo.jfif"}
+            <Image
+              src={
+                session?.user?.image
+                  ? session?.user?.image
+                  : "https://ionicframework.com/docs/img/demos/avatar.svg"
+              }
               alt="logo"
+              width="24"
+              height="24"
               className="mr-4 h-8 w-8 rounded-full"
             />
           </button>
