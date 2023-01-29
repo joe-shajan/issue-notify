@@ -1,7 +1,36 @@
 import { type NextPage } from "next";
 import Head from "next/head";
+import { Octokit } from "octokit";
 
-const Issues: NextPage = () => {
+export async function getServerSideProps() {
+  const octokit = new Octokit({
+    auth: process.env.GITHUB_PERSONAL_ACCESS_TOKEN,
+  });
+
+  try {
+    const response = await octokit.request("GET /repos/{owner}/{repo}/issues", {
+      owner: "EddieHubCommunity",
+      repo: "LinkFree",
+    });
+
+    return {
+      props: { issues: response.data },
+    };
+  } catch (error) {
+    console.log("Cannot fetch github issues ", error);
+  }
+}
+interface IssuesProps {
+  issues: [{ pull_request: [] }];
+}
+
+const Issues: NextPage<IssuesProps> = ({ issues }) => {
+  const issuesWithOutPullRequest = issues.filter(
+    (issue) => !issue.pull_request
+  );
+
+  console.log(issuesWithOutPullRequest);
+
   return (
     <>
       <Head>
