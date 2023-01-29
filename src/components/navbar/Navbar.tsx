@@ -4,10 +4,8 @@ import { useState } from "react";
 import Image from "next/image";
 import NavLink from "./NavLink";
 import { useRouter } from "next/router";
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface INavBarProps {}
 
-const NavBar: React.FunctionComponent<INavBarProps> = () => {
+const NavBar: React.FC = () => {
   const { data: session } = useSession();
   const router = useRouter();
 
@@ -29,9 +27,9 @@ const NavBar: React.FunctionComponent<INavBarProps> = () => {
             <NavLink path={router.pathname} url={"/issues"} name={"Issues"} />
           </div>
         </div>
-        <div className="">
+        <div>
           <button
-            className="rounded-lg bg-gray-800 p-2 "
+            className="rounded-lg bg-gray-800 p-2"
             onClick={() => setIsOpen((prev) => !prev)}
           >
             <Image
@@ -41,9 +39,9 @@ const NavBar: React.FunctionComponent<INavBarProps> = () => {
                   : "https://ionicframework.com/docs/img/demos/avatar.svg"
               }
               alt="logo"
-              width="24"
-              height="24"
-              className="mr-4 h-8 w-8 rounded-full"
+              width="32"
+              height="32"
+              className="rounded-full"
             />
           </button>
           <div className={`absolute ${isOpen ? "block" : "hidden"}`}>

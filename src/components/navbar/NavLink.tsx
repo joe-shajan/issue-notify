@@ -7,13 +7,7 @@ interface INavLinkProps {
   name: string;
 }
 
-const NavLink: React.FunctionComponent<INavLinkProps> = ({
-  path,
-  url,
-  name,
-}) => {
-  console.log(path);
-
+const NavLink: React.FC<INavLinkProps> = ({ path, url, name }) => {
   return (
     <Link
       href={url}
