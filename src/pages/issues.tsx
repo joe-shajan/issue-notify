@@ -4,14 +4,12 @@ import { Octokit } from "octokit";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
-import Image from "next/image";
 import Link from "next/link";
 
 interface Issue {
   title: string;
   created_at: string;
   html_url: string;
-  assignee: null | { avatar_url: string };
 }
 
 interface IssuesProps {
@@ -36,36 +34,23 @@ const Issues: NextPage<IssuesProps> = ({ issues }) => {
               {repoName}
             </div>
 
-            {values.map(
-              ({ title, created_at, assignee, html_url }, idx: number) => (
-                <div
-                  className="flex justify-between border-t border-slate-600 p-2"
-                  key={idx}
-                >
-                  <div>
-                    <Link href={html_url} target="_blank">
-                      <div className="text-white hover:text-blue-400">
-                        {title}
-                      </div>
-                    </Link>
-                    <div className="text-xs font-thin text-slate-400">
-                      {dayjs(created_at).fromNow()}
+            {values.map(({ title, created_at, html_url }, idx: number) => (
+              <div
+                className="flex justify-between border-t border-slate-600 p-2"
+                key={idx}
+              >
+                <div>
+                  <Link href={html_url} target="_blank">
+                    <div className="text-white hover:text-blue-400">
+                      {title}
                     </div>
-                  </div>
-                  <div className="flex items-center justify-center">
-                    {assignee?.avatar_url ? (
-                      <Image
-                        src={assignee.avatar_url}
-                        alt="logo"
-                        width="28"
-                        height="28"
-                        className="rounded-full"
-                      />
-                    ) : null}
+                  </Link>
+                  <div className="text-xs font-thin text-slate-400">
+                    {dayjs(created_at).fromNow()}
                   </div>
                 </div>
-              )
-            )}
+              </div>
+            ))}
           </div>
         ))}
       </div>
@@ -94,11 +79,15 @@ export async function getServerSideProps() {
         {
           owner,
           repo,
+          since: new Date(
+            new Date().valueOf() - 1000 * 60 * 60 * 24 * 3
+          ).toISOString(),
+          per_page: 100,
         }
       );
 
       const issuesWithOutPullRequests = response.data.filter(
-        (issue) => !issue.pull_request
+        (issue) => !issue.pull_request && !issue.assignee
       );
       issues[repo] = issuesWithOutPullRequests;
     }

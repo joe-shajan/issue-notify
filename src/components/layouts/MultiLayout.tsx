@@ -9,7 +9,7 @@ const MultiLayout: React.FC<IMultiLayoutProps> = ({ children }) => {
   return (
     <div>
       <NavBar />
-      <main className="bg-slate-900">{children}</main>
+      <main className="min-h-screen bg-slate-900">{children}</main>
       {/* <div>footer</div> */}
     </div>
   );
