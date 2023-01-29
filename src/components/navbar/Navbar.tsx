@@ -6,6 +6,7 @@ interface INavBarProps {}
 
 const NavBar: React.FunctionComponent<INavBarProps> = () => {
   const { data: session } = useSession();
+  console.log(session);
 
   return (
     <nav className="bg-gray-800 text-slate-100">

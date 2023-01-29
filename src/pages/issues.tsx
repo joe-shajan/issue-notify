@@ -28,18 +28,32 @@ export async function getServerSideProps() {
     auth: process.env.GITHUB_PERSONAL_ACCESS_TOKEN,
   });
 
-  try {
-    const response = await octokit.request("GET /repos/{owner}/{repo}/issues", {
-      owner: "EddieHubCommunity",
-      repo: "LinkFree",
-    });
+  const repos = [
+    { owner: "EddieHubCommunity", repo: "LinkFree" },
+    { owner: "excalidraw", repo: "excalidraw" },
+  ];
 
-    const issuesWithOutPullRequests = response.data.filter(
-      (issue) => !issue.pull_request
-    );
+  try {
+    let issues: object[] = [];
+
+    for (const { owner, repo } of repos) {
+      const response = await octokit.request(
+        "GET /repos/{owner}/{repo}/issues",
+        {
+          owner,
+          repo,
+        }
+      );
+
+      const issuesWithOutPullRequests = response.data.filter(
+        (issue) => !issue.pull_request
+      );
+
+      issues = [...issues, ...issuesWithOutPullRequests];
+    }
 
     return {
-      props: { issues: issuesWithOutPullRequests },
+      props: { issues },
     };
   } catch (error) {
     console.log("Cannot fetch github issues ", error);
