@@ -2,34 +2,12 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import { Octokit } from "octokit";
 
-export async function getServerSideProps() {
-  const octokit = new Octokit({
-    auth: process.env.GITHUB_PERSONAL_ACCESS_TOKEN,
-  });
-
-  try {
-    const response = await octokit.request("GET /repos/{owner}/{repo}/issues", {
-      owner: "EddieHubCommunity",
-      repo: "LinkFree",
-    });
-
-    return {
-      props: { issues: response.data },
-    };
-  } catch (error) {
-    console.log("Cannot fetch github issues ", error);
-  }
-}
 interface IssuesProps {
-  issues: [{ pull_request: [] }];
+  issues: [];
 }
 
 const Issues: NextPage<IssuesProps> = ({ issues }) => {
-  const issuesWithOutPullRequest = issues.filter(
-    (issue) => !issue.pull_request
-  );
-
-  console.log(issuesWithOutPullRequest);
+  console.log(issues);
 
   return (
     <>
@@ -44,3 +22,26 @@ const Issues: NextPage<IssuesProps> = ({ issues }) => {
 };
 
 export default Issues;
+
+export async function getServerSideProps() {
+  const octokit = new Octokit({
+    auth: process.env.GITHUB_PERSONAL_ACCESS_TOKEN,
+  });
+
+  try {
+    const response = await octokit.request("GET /repos/{owner}/{repo}/issues", {
+      owner: "EddieHubCommunity",
+      repo: "LinkFree",
+    });
+
+    const issuesWithOutPullRequests = response.data.filter(
+      (issue) => !issue.pull_request
+    );
+
+    return {
+      props: { issues: issuesWithOutPullRequests },
+    };
+  } catch (error) {
+    console.log("Cannot fetch github issues ", error);
+  }
+}
