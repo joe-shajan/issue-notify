@@ -66,8 +66,16 @@ export async function getServerSideProps() {
   });
 
   const repos = [
+    { owner: "calcom", repo: "cal.com" },
     { owner: "EddieHubCommunity", repo: "LinkFree" },
     { owner: "excalidraw", repo: "excalidraw" },
+    { owner: "freeCodeCamp", repo: "freeCodeCamp" },
+    { owner: "github", repo: "docs" },
+    { owner: "web-scrobbler", repo: "web-scrobbler" },
+    { owner: "react-icons", repo: "react-icons" },
+    { owner: "open-telemetry", repo: "opentelemetry.io" },
+    { owner: "TanStack", repo: "table" },
+    { owner: "t3-oss", repo: "create-t3-app" },
   ];
 
   try {
