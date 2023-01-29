@@ -1,9 +1,21 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import { Octokit } from "octokit";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+dayjs.extend(relativeTime);
+import Image from "next/image";
+import Link from "next/link";
+
+interface Issue {
+  title: string;
+  created_at: string;
+  html_url: string;
+  assignee: null | { avatar_url: string };
+}
 
 interface IssuesProps {
-  issues: Record<string, Array<{ title: string }>>;
+  issues: Record<string, Array<Issue>>;
 }
 
 const Issues: NextPage<IssuesProps> = ({ issues }) => {
@@ -17,16 +29,43 @@ const Issues: NextPage<IssuesProps> = ({ issues }) => {
         <link rel="icon" href="/logo.jfif" />
       </Head>
 
-      <div className="mx-auto mt-20 w-9/12">
+      <div className="mx-auto w-9/12 rounded pt-14">
         {Object.entries(issues).map(([repoName, values]) => (
-          <div className="mt-5 rounded border" key={repoName}>
-            <div className="bg-slate-100">{repoName}</div>
+          <div className="mt-5 rounded border border-slate-600" key={repoName}>
+            <div className="sticky top-0 rounded bg-slate-800 bg-opacity-70 p-4 capitalize text-white backdrop-blur-sm backdrop-filter">
+              {repoName}
+            </div>
 
-            {values.map(({ title }, idx: number) => (
-              <div className="bg-green-50" key={idx}>
-                {title}
-              </div>
-            ))}
+            {values.map(
+              ({ title, created_at, assignee, html_url }, idx: number) => (
+                <div
+                  className="flex justify-between border-t border-slate-600 p-2"
+                  key={idx}
+                >
+                  <div>
+                    <Link href={html_url} target="_blank">
+                      <div className="text-white hover:text-blue-400">
+                        {title}
+                      </div>
+                    </Link>
+                    <div className="text-xs font-thin text-slate-400">
+                      {dayjs(created_at).fromNow()}
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-center">
+                    {assignee?.avatar_url ? (
+                      <Image
+                        src={assignee.avatar_url}
+                        alt="logo"
+                        width="28"
+                        height="28"
+                        className="rounded-full"
+                      />
+                    ) : null}
+                  </div>
+                </div>
+              )
+            )}
           </div>
         ))}
       </div>
