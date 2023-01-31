@@ -1,10 +1,11 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import { Octokit } from "octokit";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-dayjs.extend(relativeTime);
+// import dayjs from "dayjs";
+// import relativeTime from "dayjs/plugin/relativeTime";
+// dayjs.extend(relativeTime);
 import Link from "next/link";
+import SingleIssue from "../components/issues/SingleIssue";
 
 interface Issue {
   title: string;
@@ -28,28 +29,19 @@ const Issues: NextPage<IssuesProps> = ({ issues }) => {
       </Head>
 
       <div className="mx-auto w-9/12 rounded pt-14">
-        {Object.entries(issues).map(([repoName, values]) => (
+        {Object.entries(issues).map(([repoName, issueData]) => (
           <div className="mt-5 rounded border border-slate-600" key={repoName}>
             <div className="sticky top-0 rounded bg-slate-800 bg-opacity-70 p-4 capitalize text-white backdrop-blur-sm backdrop-filter">
               {repoName}
             </div>
 
-            {values.map(({ title, created_at, html_url }, idx: number) => (
-              <div
-                className="flex justify-between border-t border-slate-600 p-2"
+            {issueData.map(({ html_url, title, created_at }, idx: number) => (
+              <SingleIssue
+                html_url={html_url}
+                title={title}
+                created_at={created_at}
                 key={idx}
-              >
-                <div>
-                  <Link href={html_url} target="_blank">
-                    <div className="text-white hover:text-blue-400">
-                      {title}
-                    </div>
-                  </Link>
-                  <div className="text-xs font-thin text-slate-400">
-                    {dayjs(created_at).fromNow()}
-                  </div>
-                </div>
-              </div>
+              />
             ))}
           </div>
         ))}
