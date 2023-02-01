@@ -19,7 +19,7 @@ const SingleRepo: React.FC<ISingleRepoProps> = ({ owner, repo, octokit }) => {
   const [issuesData, setIssuesData] = useState<Array<Issue>>([]);
   // console.log("single repo rendering");
 
-  const fetchData = async () => {
+  const fetchData = async (owner: string, repo: string) => {
     try {
       const result = await octokit.request("GET /repos/{owner}/{repo}/issues", {
         owner,
@@ -42,7 +42,9 @@ const SingleRepo: React.FC<ISingleRepoProps> = ({ owner, repo, octokit }) => {
   };
 
   useEffect(() => {
-    fetchData();
+    fetchData(owner, repo)
+      .then(() => console.log("in then"))
+      .catch(() => console.log("in catch"));
   }, []);
 
   return (
