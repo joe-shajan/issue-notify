@@ -26,7 +26,7 @@ const NavBar: React.FC = () => {
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
             <Image
-              src="/logo.jfif"
+              src="/logo.png"
               alt="logo"
               width="42"
               height="42"
