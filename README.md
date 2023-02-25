@@ -7,10 +7,13 @@ clone this repo
 ### Step 2
 `npm install`
 
-### Step 3
+### Step 3 If installing for the first time
 `npx prisma db push`
 
 ### Step 4
+`docker-compose up`
+
+### Step 5
 `npm run dev`
 
 
