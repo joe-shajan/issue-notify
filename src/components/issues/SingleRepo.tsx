@@ -27,7 +27,7 @@ const SingleRepo: React.FC<ISingleRepoProps> = ({ owner, repo, octokit }) => {
         since: new Date(
           new Date().valueOf() - 1000 * 60 * 60 * 24 * 3
         ).toISOString(),
-        per_page: 100,
+        per_page: 10,
       });
 
       const issuesWithOutPullRequests = result.data.filter(
