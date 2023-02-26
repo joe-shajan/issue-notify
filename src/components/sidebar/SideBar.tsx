@@ -1,9 +1,13 @@
 import Link from "next/link";
 import { memo } from "react";
 
-const SideBar = () => {
+type SideBar = {
+  sideBarWidth: string;
+};
+
+const SideBar = ({ sideBarWidth }: SideBar) => {
   return (
-    <aside className="w-44 border">
+    <aside className={`fixed h-[100%] w-[${sideBarWidth}] border`}>
       <ul>
         <li>
           <Link href={"/issues/cal"}>cal.com</Link>

@@ -49,10 +49,34 @@ const SingleRepo: React.FC<ISingleRepoProps> = ({ owner, repo, octokit }) => {
 
   return (
     <div className="mt-5 rounded border border-slate-600">
-      <div className="sticky top-0 rounded bg-slate-800 bg-opacity-70 p-4 capitalize text-white backdrop-blur-sm backdrop-filter">
+      <div className="rounded bg-slate-800 p-4 capitalize text-white">
         {error ? `could not fetch issues` : repo}
       </div>
 
+      {issuesData.map(({ html_url, title, created_at }, idx: number) => (
+        <SingleIssue
+          html_url={html_url}
+          title={title}
+          created_at={created_at}
+          key={idx}
+        />
+      ))}
+      {issuesData.map(({ html_url, title, created_at }, idx: number) => (
+        <SingleIssue
+          html_url={html_url}
+          title={title}
+          created_at={created_at}
+          key={idx}
+        />
+      ))}
+      {issuesData.map(({ html_url, title, created_at }, idx: number) => (
+        <SingleIssue
+          html_url={html_url}
+          title={title}
+          created_at={created_at}
+          key={idx}
+        />
+      ))}
       {issuesData.map(({ html_url, title, created_at }, idx: number) => (
         <SingleIssue
           html_url={html_url}

@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
-import React from "react";
 import IssueLayout from "../../layouts/IssueLayout";
+
+const sideBarWidth = "300px";
 
 const SingleRepoIssues = () => {
   const {
@@ -8,8 +9,8 @@ const SingleRepoIssues = () => {
   } = useRouter();
 
   return (
-    <IssueLayout>
-      <div className="w-full border">{repo}</div>
+    <IssueLayout sideBarWidth={sideBarWidth}>
+      <div className={`ml-[${sideBarWidth}] w-full border`}>{repo}</div>
     </IssueLayout>
   );
 };

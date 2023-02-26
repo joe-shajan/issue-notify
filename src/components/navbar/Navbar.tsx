@@ -21,7 +21,7 @@ const NavBar: React.FC = () => {
   }, []);
 
   return (
-    <nav className="bg-slate-800 text-slate-100">
+    <nav className="sticky top-0 bg-slate-800 text-slate-100">
       <div className="mx-auto w-9/12">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
