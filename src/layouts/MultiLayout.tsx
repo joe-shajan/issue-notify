@@ -1,5 +1,5 @@
 import * as React from "react";
-import NavBar from "../navbar/Navbar";
+import NavBar from "../components/navbar/Navbar";
 
 interface IMultiLayoutProps {
   children: React.ReactNode;
@@ -7,9 +7,9 @@ interface IMultiLayoutProps {
 
 const MultiLayout: React.FC<IMultiLayoutProps> = ({ children }) => {
   return (
-    <div>
+    <div className="min-h-screen bg-slate-900">
       <NavBar />
-      <main className="min-h-screen bg-slate-900">{children}</main>
+      <main>{children}</main>
       {/* <div>footer</div> */}
     </div>
   );
