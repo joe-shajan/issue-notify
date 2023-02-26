@@ -10,16 +10,15 @@ interface Issue {
   html_url: string;
 }
 
-interface ISingleRepoProps {
-  owner: string | null;
-  repo: string | null;
-  octokit: Octokit;
-}
+// interface ISingleRepoProps {
+//   owner: string | null;
+//   repo: string | null;
+//   octokit: Octokit;
+// }
 
 const SingleRepoIssues = () => {
   const {
     query: { repo, owner },
-    isReady,
   } = useRouter();
 
   const [issuesData, setIssuesData] = useState<Array<Issue>>([]);
@@ -50,8 +49,8 @@ const SingleRepoIssues = () => {
   };
 
   useEffect(() => {
-    if (isReady) {
-      fetchData(owner, repo)
+    if (owner && repo) {
+      fetchData(owner.toString(), repo.toString())
         .then(() => console.log("in then"))
         .catch(() => console.log("in catch"));
     }
