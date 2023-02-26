@@ -1,5 +1,5 @@
 import * as React from "react";
-import NavBar from "../navbar/Navbar";
+import NavBar from "../components/navbar/Navbar";
 
 interface IMultiLayoutProps {
   children: React.ReactNode;
