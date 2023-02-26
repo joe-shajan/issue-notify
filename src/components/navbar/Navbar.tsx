@@ -34,7 +34,11 @@ const NavBar: React.FC = () => {
             />
             <div className="ml-10 flex items-baseline space-x-4">
               <NavLink path={router.pathname} url={"/"} name={"Home"} />
-              <NavLink path={router.pathname} url={"/issues"} name={"Issues"} />
+              <NavLink
+                path={router.pathname}
+                url={"/issues/calcom/cal.com"}
+                name={"Issues"}
+              />
             </div>
           </div>
           {session?.user?.name ? (
