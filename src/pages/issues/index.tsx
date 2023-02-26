@@ -1,7 +1,7 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import { Octokit } from "octokit";
-import SingleRepo from "../components/issues/SingleRepo";
+import SingleRepo from "../../components/issues/SingleRepo";
 
 const repos = [
   { owner: "calcom", repo: "cal.com" },
