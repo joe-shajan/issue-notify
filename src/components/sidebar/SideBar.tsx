@@ -20,7 +20,7 @@ const SideBar = () => {
 
   return (
     <aside
-      className={`scrollbar fixed h-[100%] w-[300px] overflow-scroll px-4`}
+      className={`scrollbar fixed h-[100%] w-[300px] overflow-scroll border-r-[1px] border-slate-700 px-4`}
     >
       <div className="mb-2 flex justify-end border-b-[1px] border-slate-700 py-4">
         <button className="rounded bg-[#238636] py-1 px-2 text-sm font-semibold capitalize">

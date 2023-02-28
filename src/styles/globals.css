@@ -7,16 +7,12 @@
     width: 5px;
   }
 
-  .scrollbar::-webkit-scrollbar-track {
-    background: #192841;
-  }
-
   .scrollbar::-webkit-scrollbar-thumb {
-    background: #757b86;
+    background: #8c919a;
     border-radius: 100vh;
   }
 
   .scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #9aa0ab;
+    background: #9fa3ab;
   }
 }
