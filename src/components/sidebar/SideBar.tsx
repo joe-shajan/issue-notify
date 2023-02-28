@@ -19,16 +19,24 @@ const SideBar = () => {
   const { query } = useRouter();
 
   return (
-    <aside className={`scrollbar fixed h-[100%] w-[300px] overflow-scroll`}>
+    <aside
+      className={`scrollbar fixed h-[100%] w-[300px] overflow-scroll px-4`}
+    >
+      <div className="flex justify-end border-b-[1px] border-slate-700 py-4">
+        <button className="rounded bg-[#238636] py-1 px-2 text-sm font-semibold capitalize">
+          add new repo
+        </button>
+      </div>
       <ul className="overflow-hidden text-ellipsis whitespace-nowrap">
         {repos.map(({ owner, repo }) => (
-          <li key={repo}>
+          <li
+            key={repo}
+            className={`my-1 rounded-md p-2 hover:bg-slate-800 ${
+              repo === query.repo ? "bg-slate-800" : ""
+            }`}
+          >
             <Link href={`/issues/${owner}/${repo}`}>
-              <p
-                className={`p-2 hover:bg-slate-800 ${
-                  repo === query.repo ? "bg-slate-800" : ""
-                }`}
-              >
+              <p>
                 {owner} / {repo}
               </p>
             </Link>
