@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "./Button";
 
 // type Props = {};
+import { api } from "../utils/api";
 
 const AddNewRepository = () => {
   const [owner, setOwner] = useState("");
@@ -12,6 +13,20 @@ const AddNewRepository = () => {
     console.log(owner, repository);
   };
 
+  const hello = api.example.hello.useQuery({ text: "from tRPC" });
+  console.log(hello.data);
+
+  const addNewRepo = api.repository.addRepo.useMutation();
+
+  const mut = () => {
+    const response = addNewRepo.mutate({ owner: "joppan", repo: "joe" });
+
+    console.log(response);
+  };
+  useEffect(() => {
+    mut();
+  }, []);
+  // console.log(test.data);
   return (
     <div className="rounded-xl border border-slate-600 bg-slate-900 p-20">
       <form onSubmit={handleSubmit}>
