@@ -41,13 +41,15 @@ model Session {
 }
 
 model User {
-    id            String    @id @default(cuid())
-    name          String?
-    email         String?   @unique
-    emailVerified DateTime?
-    image         String?
-    accounts      Account[]
-    sessions      Session[]
+    id                String           @id @default(cuid())
+    name              String?
+    email             String?          @unique
+    emailVerified     DateTime?
+    image             String?
+    accounts          Account[]
+    sessions          Session[]
+    ownerRepository   OwnerRepository? @relation(fields: [ownerRepositoryId], references: [id])
+    ownerRepositoryId String?
 }
 
 model VerificationToken {
@@ -56,4 +58,27 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+model Owner {
+    id              String            @id @default(cuid())
+    name            String            @unique
+    repositories    Repository[]      @relation("OwnerRepository")
+    ownerRepository OwnerRepository[]
+}
+
+model Repository {
+    id              String            @id @default(cuid())
+    name            String            @unique
+    owners          Owner[]           @relation("OwnerRepository")
+    ownerRepository OwnerRepository[]
+}
+
+model OwnerRepository {
+    id           String     @id @default(cuid())
+    owner        Owner      @relation(fields: [ownerId], references: [id])
+    repository   Repository @relation(fields: [repositoryId], references: [id])
+    ownerId      String
+    repositoryId String
+    users        User[]
 }
