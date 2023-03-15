@@ -3,7 +3,7 @@ import { z } from "zod";
 import { createTRPCRouter, publicProcedure, protectedProcedure } from "../trpc";
 
 export const repositoryRouter = createTRPCRouter({
-  addRepo: protectedProcedure
+  addRepo: publicProcedure
     .input(z.object({ owner: z.string(), repo: z.string() }))
     .mutation(({ ctx, input }) => {
       console.log(ctx.session);
