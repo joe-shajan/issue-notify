@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "./Button";
 
 // type Props = {};
@@ -15,6 +15,9 @@ const AddNewRepository = () => {
     console.log(owner, repository);
     addNewRepo.mutate({ owner, repository });
   };
+
+  // const result = api.repository.getRepositorys.useQuery();
+  // console.log(result.data);
 
   // console.log(test.data);
   return (
