@@ -2,7 +2,7 @@
 
 ### Step 1
 
-Fork and clone this repo
+**Fork and clone this repo**
 
 ### Step 2
 
