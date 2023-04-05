@@ -38,3 +38,9 @@
    ```sh
    npx prisma db push
    ```
+
+### To view database
+
+```sh
+npx prisma studio
+```
