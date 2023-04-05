@@ -6,6 +6,8 @@ services:
     ports:
       - '6500:5432'
     restart: always
+    environment:
+      POSTGRES_PASSWORD: password123
     env_file:
       - ./.env
     volumes:
