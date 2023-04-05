@@ -1,25 +1,40 @@
-# How to start this app
+## Development
 
-### Step 1
+### setup
 
-**Fork and clone this repo**
+1. Fork and clone this repo
 
-### Step 2
+   ```sh
+   git clone https://github.com/<your-username>/issue-notify.git
+   ```
 
-```
-npm install
-```
+1. Go to the project folder
 
-### Step 3
+   ```sh
+   cd issue-notify
+   ```
 
-```
-npm run dev
-```
+1. Install packages with npm
 
-### Step 4 If installing for the first time
+   ```sh
+   npm install
+   ```
 
-**In new terminal**
+1. Set up your .env file
 
-```
-npx prisma db push
-```
+   - Duplicate `.env.example` to `.env`
+   - Use `openssl rand -base64 32` to generate a key and add it under `NEXTAUTH_SECRET` in the .env file.
+
+1. Start the app
+
+   ```sh
+   npm run dev
+   ```
+
+1. If installing for the first time
+
+   In new terminal
+
+   ```sh
+   npx prisma db push
+   ```
