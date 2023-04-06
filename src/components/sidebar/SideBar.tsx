@@ -6,16 +6,26 @@ import AddNewRepository from "../AddNewRepository";
 import Button from "../Button";
 
 const repos = [
+  { owner: "coral-xyz", repo: "backpack" },
   { owner: "calcom", repo: "cal.com" },
-  { owner: "EddieHubCommunity", repo: "LinkFree" },
-  { owner: "excalidraw", repo: "excalidraw" },
-  { owner: "freeCodeCamp", repo: "freeCodeCamp" },
-  { owner: "github", repo: "docs" },
-  { owner: "web-scrobbler", repo: "web-scrobbler" },
-  { owner: "react-icons", repo: "react-icons" },
-  { owner: "open-telemetry", repo: "opentelemetry.io" },
+  { owner: "remotion-dev", repo: "remotion" },
+  { owner: "trpc", repo: "trpc" },
+
   { owner: "TanStack", repo: "table" },
+  { owner: "TanStack", repo: "query" },
+  { owner: "react-hook-form", repo: "react-hook-form" },
+  { owner: "storybookjs", repo: "storybook" },
+  { owner: "timolins", repo: "react-hot-toast" },
   { owner: "t3-oss", repo: "create-t3-app" },
+
+  { owner: "vector-im", repo: "element-web" },
+  { owner: "jitsi", repo: "jitsi-meet" },
+  { owner: "appwrite", repo: "appwrite" },
+  { owner: "RocketChat", repo: "Rocket.Chat" },
+
+  { owner: "vercel", repo: "vercel" },
+  { owner: "vercel", repo: "hyper" },
+  { owner: "vercel", repo: "swr" },
 ];
 
 const SideBar = () => {
