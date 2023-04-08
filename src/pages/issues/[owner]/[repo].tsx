@@ -33,9 +33,9 @@ const SingleRepoIssues = () => {
         owner,
         repo,
         since: new Date(
-          new Date().valueOf() - 1000 * 60 * 60 * 24 * 3
+          new Date().valueOf() - 1000 * 60 * 60 * 24 * 7
         ).toISOString(),
-        per_page: 10,
+        per_page: 100,
       });
 
       const issuesWithOutPullRequests = result.data.filter(
