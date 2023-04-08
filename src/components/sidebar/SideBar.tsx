@@ -9,6 +9,7 @@ const repos = [
   { owner: "coral-xyz", repo: "backpack" },
   { owner: "calcom", repo: "cal.com" },
   { owner: "remotion-dev", repo: "remotion" },
+  { owner: "erxes", repo: "erxes" },
   { owner: "trpc", repo: "trpc" },
 
   { owner: "TanStack", repo: "table" },
