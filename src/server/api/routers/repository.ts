@@ -49,29 +49,58 @@ export const repositoryRouter = createTRPCRouter({
         });
 
         if (existingUser) {
-          await ctx.prisma.ownerUser.create({
-            data: {
-              owner: {
-                connect: {
-                  id: addedOwner.id,
-                },
-              },
-              user: {
-                connect: {
-                  id: existingUser.id,
-                },
-              },
+          const addedOwnerUser = await ctx.prisma.ownerUser.findFirst({
+            where: {
+              ownerId: addedOwner.id,
+              userId: existingUser.id,
             },
           });
+
+          if (!addedOwnerUser) {
+            await ctx.prisma.ownerUser.create({
+              data: {
+                owner: {
+                  connect: {
+                    id: addedOwner.id,
+                  },
+                },
+                user: {
+                  connect: {
+                    id: existingUser.id,
+                  },
+                },
+              },
+            });
+          }
         }
       } catch (error) {
         console.log(error);
       }
     }),
 
-  // getRepositorys: protectedProcedure.query(async ({ ctx }) => {
+  getAll: publicProcedure.query(async ({ ctx }) => {
+    // if (!ctx.session?.user?.id) {
+    //   throw new TRPCError({
+    //     code: "BAD_REQUEST",
+    //     message: "User not logged in",
+    //   });
+    // }
 
-  // }),
+    const result = await ctx.prisma.ownerUser.findMany({
+      where: {
+        userId: ctx.session?.user?.id,
+      },
+      select: {
+        owner: {
+          include: {
+            repositories: true,
+          },
+        },
+      },
+    });
+
+    return result;
+  }),
 
   getSecretMessage: protectedProcedure.query(() => {
     return "you can now see this secret message!";
