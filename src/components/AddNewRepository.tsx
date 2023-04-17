@@ -1,25 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Button from "./Button";
 
-// type Props = {};
-import { api } from "../utils/api";
+interface AddNewRepositoryProps {
+  addRepo: (owner: string, repository: string) => void;
+  isLoading: boolean;
+}
 
-const AddNewRepository = () => {
+const AddNewRepository = ({ addRepo, isLoading }: AddNewRepositoryProps) => {
   const [owner, setOwner] = useState("");
   const [repository, setRepository] = useState("");
 
-  const addNewRepo = api.repository.addRepo.useMutation();
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(owner, repository);
-    addNewRepo.mutate({ owner, repository });
+    addRepo(owner, repository);
   };
 
-  // const result = api.repository.getRepositorys.useQuery();
-  // console.log(result.data);
-
-  // console.log(test.data);
   return (
     <div className="rounded-xl border border-slate-600 bg-slate-900 p-20">
       <form onSubmit={handleSubmit}>
@@ -55,7 +50,9 @@ const AddNewRepository = () => {
         </div>
 
         <div className="flex justify-center">
-          <Button varient="lg">Submit</Button>
+          <Button varient="lg" isLoading={isLoading}>
+            Submit
+          </Button>
         </div>
       </form>
     </div>
