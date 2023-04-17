@@ -5,6 +5,11 @@ import useModal from "../../custom-hooks/useModal";
 import AddNewRepository from "../AddNewRepository";
 import Button from "../Button";
 
+import toast, { Toaster } from "react-hot-toast";
+
+// type Props = {};
+import { api } from "../../utils/api";
+
 const repos = [
   { owner: "coral-xyz", repo: "backpack" },
   { owner: "calcom", repo: "cal.com" },
@@ -33,8 +38,23 @@ const SideBar = () => {
   const { query } = useRouter();
   const { Modal, openModal, closeModal } = useModal();
 
+  const { mutate: addNewRepo, isLoading } = api.repository.addRepo.useMutation({
+    onSuccess: () => {
+      toast.success("Repository added");
+      closeModal();
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
+  const addRepo = (owner: string, repository: string) => {
+    addNewRepo({ owner, repository });
+  };
+
   return (
     <>
+      <Toaster />
       <aside
         className={`scrollbar fixed h-[100%] w-[300px] overflow-scroll border-r-[1px] border-slate-700 px-4`}
       >
@@ -60,7 +80,7 @@ const SideBar = () => {
       </aside>
 
       <Modal>
-        <AddNewRepository />
+        <AddNewRepository addRepo={addRepo} isLoading={isLoading} />
       </Modal>
     </>
   );
