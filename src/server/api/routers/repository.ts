@@ -4,7 +4,7 @@ import { createTRPCRouter, publicProcedure, protectedProcedure } from "../trpc";
 import { TRPCError } from "@trpc/server";
 
 export const repositoryRouter = createTRPCRouter({
-  addRepo: protectedProcedure
+  addRepo: publicProcedure
     .input(z.object({ owner: z.string(), repository: z.string() }))
     .mutation(async ({ ctx, input }) => {
       const { owner, repository } = input;
