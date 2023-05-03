@@ -31,6 +31,8 @@ import SidemenuItem from "./SidemenuItem";
 //   { owner: "vercel", repo: "vercel" },
 //   { owner: "vercel", repo: "hyper" },
 //   { owner: "vercel", repo: "swr" },
+//   { owner: "radix-ui", repo: "primitives" },
+//   { owner: "shadcn", repo: "ui" },
 // ];
 
 const SideBar = () => {
