@@ -4,7 +4,7 @@ import { createTRPCRouter, publicProcedure, protectedProcedure } from "../trpc";
 import { TRPCError } from "@trpc/server";
 
 export const repositoryRouter = createTRPCRouter({
-  addRepo: publicProcedure
+  addRepo: protectedProcedure
     .input(z.object({ owner: z.string(), repository: z.string() }))
     .mutation(async ({ ctx, input }) => {
       const { owner, repository } = input;
@@ -31,7 +31,7 @@ export const repositoryRouter = createTRPCRouter({
           });
         }
 
-        const newRepository = await ctx.prisma.repository.create({
+        await ctx.prisma.repository.create({
           data: {
             name: repository,
             owner: {
