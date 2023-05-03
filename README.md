@@ -27,6 +27,8 @@
 
 1. Start the app
 
+   Note: before starting the app make sure that your docker is running
+
    ```sh
    npm run dev
    ```
