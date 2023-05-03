@@ -28,6 +28,9 @@ import SidemenuItem from "./SidemenuItem";
 //   { owner: "appwrite", repo: "appwrite" },
 //   { owner: "RocketChat", repo: "Rocket.Chat" },
 
+//   { owner: "vercel", repo: "vercel" },
+//   { owner: "vercel", repo: "hyper" },
+//   { owner: "vercel", repo: "swr" },
 //   { owner: "radix-ui", repo: "primitives" },
 //   { owner: "shadcn", repo: "ui" },
 // ];
