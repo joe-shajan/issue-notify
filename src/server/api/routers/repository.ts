@@ -4,7 +4,7 @@ import { createTRPCRouter, publicProcedure, protectedProcedure } from "../trpc";
 import { TRPCError } from "@trpc/server";
 
 export const repositoryRouter = createTRPCRouter({
-  addRepo: publicProcedure
+  addRepo: protectedProcedure
     .input(z.object({ owner: z.string(), repository: z.string() }))
     .mutation(async ({ ctx, input }) => {
       const { owner, repository } = input;
@@ -78,7 +78,7 @@ export const repositoryRouter = createTRPCRouter({
       }
     }),
 
-  getAll: publicProcedure.query(async ({ ctx }) => {
+  getAll: protectedProcedure.query(async ({ ctx }) => {
     // if (!ctx.session?.user?.id) {
     //   throw new TRPCError({
     //     code: "BAD_REQUEST",
