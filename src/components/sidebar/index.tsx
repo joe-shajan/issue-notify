@@ -38,8 +38,6 @@ const SideBar = () => {
 
   const { data, isLoading: postsLoading } = api.repository.getAll.useQuery();
 
-  console.log(data);
-
   const { mutate: addNewRepo, isLoading } = api.repository.addRepo.useMutation({
     onSuccess: () => {
       toast.success("Repository added");
