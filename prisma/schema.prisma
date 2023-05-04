@@ -1,12 +1,11 @@
 generator client {
-    provider        = "prisma-client-js"
-    previewFeatures = ["referentialIntegrity"]
+    provider = "prisma-client-js"
 }
 
 datasource db {
-    provider             = "mysql"
-    url                  = env("DATABASE_URL")
-    referentialIntegrity = "prisma"
+    provider     = "mysql"
+    url          = env("DATABASE_URL")
+    relationMode = "prisma"
 }
 
 model Example {
@@ -33,6 +32,7 @@ model Account {
     user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     @@unique([provider, providerAccountId])
+    @@index([userId])
 }
 
 model Session {
@@ -41,6 +41,8 @@ model Session {
     userId       String
     expires      DateTime
     user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@index([userId])
 }
 
 model User {
@@ -72,14 +74,19 @@ model Owner {
 model Repository {
     id      String @id @default(cuid())
     name    String
-    owner   Owner  @relation(fields: [ownerId], references: [id])
     ownerId String
+    owner   Owner  @relation(fields: [ownerId], references: [id])
+
+    @@index([ownerId])
 }
 
 model OwnerUser {
     id      String @id @default(cuid())
-    owner   Owner  @relation(fields: [ownerId], references: [id])
     ownerId String
-    user    User   @relation(fields: [userId], references: [id])
     userId  String
+    owner   Owner  @relation(fields: [ownerId], references: [id])
+    user    User   @relation(fields: [userId], references: [id])
+
+    @@index([ownerId])
+    @@index([userId])
 }
