@@ -75,7 +75,7 @@ const NavBar: React.FC = () => {
           ) : (
             <button
               className="w-20 rounded p-2 hover:bg-gray-700"
-              onClick={() => void signIn()}
+              onClick={() => void signIn("github")}
             >
               Sign in
             </button>
