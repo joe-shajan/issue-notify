@@ -50,4 +50,4 @@ npx prisma studio
 ### after updating prisma schema
 
 1. npx prisma migrate dev --name added_refreshtoken
-2. npx prisma generate
+1. npx prisma generate
